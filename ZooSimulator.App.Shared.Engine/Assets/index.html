@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'"
+    />
+    <title>Little Wild · Zoo Simulator</title>
+    <link rel="icon" type="image/svg+xml" href="Brand/application.svg" />
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="vendor/babylon.js"></script>
+    <script defer src="vendor/babylonjs.loaders.min.js"></script>
+    <script defer src="scene.js"></script>
+    <script defer src="clock-mascot.js"></script>
+    <script defer src="host.js"></script>
+    <script defer src="actors.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <div class="brand-icon">
+          <img
+            src="Brand/application.svg"
+            width="49"
+            height="49"
+            alt="Little Wild"
+          />
+        </div>
+        <div>
+          <span class="eyebrow">A LITTLE WORLD TO LOOK AFTER</span>
+          <h1>little wild<span>zoo</span></h1>
+        </div>
+      </div>
+      <div class="habitat-pill">
+        <span class="live-dot"></span> THREE HABITATS · FIFTEEN FRIENDS
+      </div>
+      <section class="clock" aria-label="Zoo clock">
+        <div
+          id="clock-mascot"
+          aria-label="Pip the clock chick"
+          title="Pip celebrates every new zoo hour"
+        >
+          <canvas
+            id="mascot-scene"
+            width="144"
+            height="144"
+            aria-label="Pip, an animated three-dimensional chick"
+          ></canvas>
+          <span class="clock-cheer">NEW HOUR! ✦</span>
+        </div>
+        <div class="clock-face">
+          <svg class="dial-ticks" viewBox="0 0 80 80" aria-hidden="true">
+            <path
+              class="major"
+              d="M40.00,9.00L40.00,3.00M55.50,13.15L58.50,7.96M66.85,24.50L72.04,21.50M71.00,40.00L77.00,40.00M66.85,55.50L72.04,58.50M55.50,66.85L58.50,72.04M40.00,71.00L40.00,77.00M24.50,66.85L21.50,72.04M13.15,55.50L7.96,58.50M9.00,40.00L3.00,40.00M13.15,24.50L7.96,21.50M24.50,13.15L21.50,7.96"
+            />
+            <path
+              d="M43.55,6.19L43.87,3.20M47.07,6.74L47.69,3.81M50.51,7.66L51.43,4.81M53.83,8.94L55.05,6.20M59.98,12.49L61.75,10.07M62.75,14.73L64.76,12.50M65.27,17.25L67.50,15.24M67.51,20.02L69.93,18.25M71.06,26.17L73.80,24.95M72.34,29.49L75.19,28.57M73.26,32.93L76.19,32.31M73.81,36.45L76.80,36.13M73.81,43.55L76.80,43.87M73.26,47.07L76.19,47.69M72.34,50.51L75.19,51.43M71.06,53.83L73.80,55.05M67.51,59.98L69.93,61.75M65.27,62.75L67.50,64.76M62.75,65.27L64.76,67.50M59.98,67.51L61.75,69.93M53.83,71.06L55.05,73.80M50.51,72.34L51.43,75.19M47.07,73.26L47.69,76.19M43.55,73.81L43.87,76.80M36.45,73.81L36.13,76.80M32.93,73.26L32.31,76.19M29.49,72.34L28.57,75.19M26.17,71.06L24.95,73.80M20.02,67.51L18.25,69.93M17.25,65.27L15.24,67.50M14.73,62.75L12.50,64.76M12.49,59.98L10.07,61.75M8.94,53.83L6.20,55.05M7.66,50.51L4.81,51.43M6.74,47.07L3.81,47.69M6.19,43.55L3.20,43.87M6.19,36.45L3.20,36.13M6.74,32.93L3.81,32.31M7.66,29.49L4.81,28.57M8.94,26.17L6.20,24.95M12.49,20.02L10.07,18.25M14.73,17.25L12.50,15.24M17.25,14.73L15.24,12.50M20.02,12.49L18.25,10.07M26.17,8.94L24.95,6.20M29.49,7.66L28.57,4.81M32.93,6.74L32.31,3.81M36.45,6.19L36.13,3.20"
+            /></svg
+          ><i id="clock-hand"></i><i id="minute-hand"></i>
+        </div>
+        <div class="clock-readout">
+          <span class="eyebrow">ZOO TIME · WITH PIP</span>
+          <strong id="time" data-hours="0">00:00:00</strong>
+          <small>1 zoo hour / 20 seconds</small>
+        </div>
+      </section>
+    </header>
+    <main id="world">
+      <canvas id="scene" aria-label="Three-dimensional zoo enclosure"></canvas>
+      <div id="labels"></div>
+      <div class="world-note">
+        <span>✧</span> A small sanctuary. A big responsibility.
+      </div>
+      <div id="loading">
+        <div class="spinner"></div>
+        <h2>Waking up the wild…</h2>
+        <p>Preparing three tiny habitats and their residents.</p>
+      </div>
+      <div id="toast" role="status"></div>
+    </main>
+    <footer>
+      <div class="tray-title">
+        <span class="eyebrow">THE FEEDING TRAY</span>
+        <h2>A little love goes a long way.</h2>
+        <p>Drag a snack onto an animal to feed that friend.</p>
+      </div>
+      <div class="foods" aria-label="Draggable food">
+        <button class="food" data-food="banana">
+          <span>🍌</span><b>Banana</b><small>DRAG TO FEED</small></button
+        ><button class="food" data-food="leaves">
+          <span>🌿</span><b>Fresh leaves</b><small>DRAG TO FEED</small></button
+        ><button class="food" data-food="apple">
+          <span>🍎</span><b>Apple</b><small>DRAG TO FEED</small>
+        </button>
+      </div>
+      <div class="feed-all">
+        <button id="feed-all">Feed whole zoo</button
+        ><small>Whole-zoo feeding follows the exercise brief.</small>
+        <button id="reset-game">↻ Reset game</button>
+      </div>
+    </footer>
+    <div id="drag-ghost"></div>
+  </body>
+</html>

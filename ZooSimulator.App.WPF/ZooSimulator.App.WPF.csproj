@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <ApplicationIcon>../ZooSimulator.App.Shared.Engine/Assets/Brand/application.ico</ApplicationIcon>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <WarningsAsErrors>$(WarningsAsErrors);nullable</WarningsAsErrors>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="../ZooSimulator.App.Shared.Engine/Assets/Brand/application.ico" Link="Assets/application.ico" />
+    <ProjectReference Include="../ZooSimulator.Rmvc/ZooSimulator.Rmvc.csproj" />
+    <ProjectReference Include="../ZooSimulator.App.Shared.Engine/ZooSimulator.App.Shared.Engine.csproj" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4314.35" />
+  </ItemGroup>
+</Project>

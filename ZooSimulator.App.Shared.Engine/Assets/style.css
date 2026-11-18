@@ -1,0 +1,691 @@
+* {
+  box-sizing: border-box;
+}
+:root {
+  font-family: "Segoe UI", sans-serif;
+  color: #1e4236;
+  background: #f6f3e9;
+  font-synthesis: none;
+}
+body {
+  margin: 0;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 136px minmax(0, 1fr) 174px;
+  overflow: hidden;
+}
+button {
+  font: inherit;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 36px;
+  border-bottom: 1px solid #dfdfcf;
+  background: #fbf9f1;
+  z-index: 2;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.brand-icon {
+  width: 49px;
+  height: 49px;
+  background: #254b3b;
+  color: #efc86c;
+  border-radius: 16px;
+  font-size: 36px;
+  display: grid;
+  place-items: center;
+  transform: rotate(-8deg);
+}
+.eyebrow {
+  font-size: 9px;
+  letter-spacing: 2px;
+  font-weight: 750;
+  color: #7d8a73;
+}
+h1 {
+  font-family: Georgia, serif;
+  font-weight: normal;
+  font-size: 34px;
+  line-height: 1;
+  margin: 7px 0 0;
+  letter-spacing: -1px;
+}
+h1 span {
+  font:
+    11px "Segoe UI",
+    sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-left: 12px;
+  color: #8d997d;
+}
+.habitat-pill {
+  border: 1px solid #dbe0d0;
+  border-radius: 30px;
+  padding: 12px 18px;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #8eae73;
+  box-shadow: 0 0 0 4px #e6eddf;
+}
+.clock {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.clock strong {
+  display: block;
+  font-size: 32px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 2px;
+  margin: 3px 0;
+}
+.clock small {
+  display: block;
+  font-size: 10px;
+  color: #8d947e;
+}
+.clock-face {
+  height: 84px;
+  width: 84px;
+  flex-shrink: 0;
+  border: 2px solid #d4bd86;
+  box-shadow: inset 0 0 0 5px #f1e8d3;
+  border-radius: 50%;
+  position: relative;
+}
+.clock-face:before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background: #315540;
+  border-radius: 50%;
+  position: absolute;
+  left: 38px;
+  top: 38px;
+  z-index: 1;
+}
+.clock-face i {
+  position: absolute;
+  width: 2px;
+  height: 24px;
+  background: #315540;
+  left: 39px;
+  bottom: 40px;
+  transform-origin: 50% 100%;
+}
+#minute-hand {
+  height: 31px;
+  width: 1px;
+  background: #9b865a;
+}
+#clock-mascot {
+  position: relative;
+  width: 70px;
+  height: 88px;
+  flex-shrink: 0;
+}
+#mascot-scene {
+  width: 100%;
+  height: 100%;
+}
+.dial-ticks {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: #b8b59b;
+  stroke-width: 0.8;
+}
+.dial-ticks .major {
+  stroke: #7e8a70;
+  stroke-width: 1.6;
+}
+.clock-cheer {
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  white-space: nowrap;
+  font-size: 9px;
+  font-weight: 800;
+  color: #a46732;
+  opacity: 0;
+  transform: translateX(-50%);
+}
+.excited .clock-cheer {
+  animation: fox-cheer 1.65s ease-out;
+}
+@keyframes fox-cheer {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  15%,
+  80% {
+    opacity: 1;
+  }
+}
+main {
+  position: relative;
+  background: #e5ead9;
+  overflow: hidden;
+}
+canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  outline: none;
+  touch-action: none;
+}
+#labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.animal-label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  contain: layout style;
+  transition: opacity 0.2s ease-out;
+  width: 100px;
+  transform: translate(-50%, -100%);
+  font-size: 10px;
+  pointer-events: none;
+}
+.health-card {
+  transform-origin: 50% 100%;
+  padding: 6px 9px;
+  border-radius: 10px;
+  background: rgba(255, 253, 244, 0.94);
+  border: 1px solid #ffffffb3;
+  box-shadow: 0 3px 12px #173d2310;
+  font-size: 10px;
+  transition: box-shadow 0.15s;
+  pointer-events: none;
+}
+.animal-label strong {
+  font-size: 10px;
+  font-weight: 650;
+}
+.animal-label .value {
+  float: right;
+  color: #6b8062;
+  font-size: 9px;
+}
+.animal-label .bar {
+  height: 4px;
+  background: #e3e6d9;
+  border-radius: 3px;
+  margin-top: 5px;
+  overflow: hidden;
+}
+.animal-label .bar span {
+  display: block;
+  height: 100%;
+  background: #6a9e65;
+}
+.animal-label em {
+  font-size: 8px;
+  font-style: normal;
+  display: none;
+  letter-spacing: 1px;
+  margin-top: 4px;
+  color: #ae772e;
+}
+.animal-label.weak .bar span {
+  background: #d3a153;
+}
+.animal-label.weak em,
+.animal-label.dead em {
+  display: block;
+}
+.animal-label.dead {
+  opacity: 0.7;
+}
+.animal-label.dead .bar span {
+  background: #a4a599;
+}
+.animal-label.drag-over .health-card {
+  box-shadow:
+    0 0 0 3px #e8b94e,
+    0 4px 20px #163d2525;
+}
+.world-note {
+  position: absolute;
+  bottom: 16px;
+  left: 26px;
+  color: #5b7957;
+  font-size: 11px;
+  letter-spacing: 0.2px;
+}
+.world-note span {
+  font-size: 20px;
+  margin-right: 8px;
+  color: #b29754;
+}
+footer {
+  background: #fbf9f1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  padding: 20px 36px;
+  border-top: 1px solid #dfe2d1;
+  z-index: 2;
+}
+.tray-title h2 {
+  font-family: Georgia, serif;
+  font-size: 21px;
+  font-weight: normal;
+  margin: 8px 0;
+  color: #294c38;
+}
+.tray-title p {
+  color: #8b947e;
+  font-size: 11px;
+  margin: 0;
+}
+.foods {
+  display: flex;
+  gap: 12px;
+}
+.food {
+  background: #f2eedf;
+  border: 1px solid #e7e0ca;
+  border-radius: 15px;
+  width: 104px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  transition:
+    transform 0.15s,
+    background 0.15s;
+  padding: 9px;
+}
+.food:hover {
+  transform: translateY(-4px);
+  background: #f5e9ca;
+}
+.food:active {
+  cursor: grabbing;
+}
+.food > span {
+  font-size: 35px;
+  filter: drop-shadow(0 3px 1px #644a1720);
+}
+.food b {
+  font-size: 11px;
+  margin-top: 4px;
+}
+.food small {
+  font-size: 7px;
+  letter-spacing: 1.2px;
+  color: #96977f;
+  margin-top: 7px;
+}
+.feed-all {
+  justify-self: end;
+  max-width: 230px;
+}
+.feed-all button {
+  background: #294e3c;
+  color: #fff9e6;
+  border: 0;
+  border-radius: 11px;
+  padding: 16px 22px;
+  font-size: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #183b2b;
+}
+.feed-all button:hover {
+  background: #38624a;
+}
+.feed-all small {
+  display: block;
+  font-size: 9px;
+  color: #929a83;
+  line-height: 1.5;
+  margin-top: 10px;
+}
+.food:disabled,
+#feed-all:disabled {
+  opacity: 0.4;
+  cursor: wait;
+}
+#drag-ghost {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 30;
+  pointer-events: none;
+  font-size: 46px;
+  transform: translate(-50%, -70%);
+  display: none;
+  filter: drop-shadow(0 5px 6px #33290c40);
+}
+#loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: #e8eddfef;
+  z-index: 5;
+}
+#loading h2 {
+  font:
+    28px Georgia,
+    serif;
+  font-weight: normal;
+  margin-bottom: 8px;
+}
+#loading p {
+  font-size: 12px;
+  color: #7c8e74;
+  max-width: 600px;
+  padding: 0 30px;
+  text-align: center;
+}
+.spinner {
+  height: 32px;
+  width: 32px;
+  border: 2px solid #cad7bf;
+  border-top-color: #497653;
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+#toast {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translate(-50%, 10px);
+  border-radius: 30px;
+  padding: 12px 22px;
+  background: #234b3de8;
+  color: #fffbe9;
+  font-size: 12px;
+  opacity: 0;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+  pointer-events: none;
+}
+#toast.visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+@media (max-width: 1150px) {
+  header,
+  footer {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+  .habitat-pill {
+    display: none;
+  }
+  .tray-title {
+    max-width: 250px;
+  }
+  .tray-title h2 {
+    font-size: 18px;
+  }
+  .food {
+    width: 88px;
+  }
+  .feed-all {
+    max-width: 180px;
+  }
+  .feed-all button {
+    padding: 15px;
+  }
+}
+
+/* Compositor-friendly urgency and feedback; model values still change only on updates. */
+.label-links {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.label-tail {
+  fill: none;
+  stroke: #78967a80;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  opacity: 0.7;
+}
+.label-tail-dot {
+  fill: #fffdf4;
+  stroke: #78967a80;
+  stroke-width: 1.5;
+}
+.animal-label .bar span {
+  transition: width 0.3s ease-out;
+}
+.animal-label:not(.low):not(.fed):not(.dead):not(.hovered) {
+  opacity: 0.78;
+}
+.animal-label:not(.low):not(.fed):not(.dead):not(.hovered) .health-card {
+  background: rgba(255, 253, 244, 0.8);
+  box-shadow: none;
+}
+.animal-label.low:not(.dead) .bar span {
+  animation: health-urgency 1.2s ease-in-out infinite;
+  background: #ca884d;
+}
+@keyframes health-urgency {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.38;
+  }
+}
+.animal-label.low:not(.dead):not(.fed) .health-card {
+  animation: danger-bump 1.4s ease-in-out infinite;
+}
+@keyframes danger-bump {
+  0%,
+  40%,
+  100% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(1.07);
+  }
+  28% {
+    transform: scale(0.985);
+  }
+}
+.animal-effects {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+.feed-burst {
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: burst-lifetime 0.95s linear forwards;
+}
+@keyframes burst-lifetime {
+  0%,
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.health-gain {
+  position: absolute;
+  left: 0;
+  top: -8px;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 800;
+  color: #376a43;
+  background: #f9fff0ed;
+  border-radius: 12px;
+  padding: 3px 7px;
+  animation: gain-rise 0.95s ease-out forwards;
+}
+.health-gain:empty {
+  display: none;
+}
+@keyframes gain-rise {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0) scale(0.85);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -10px) scale(1.08);
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -48px) scale(1);
+  }
+}
+.feed-burst i {
+  position: absolute;
+  left: -5px;
+  top: 5px;
+  font-size: 16px;
+  font-style: normal;
+  color: #e5b443;
+  animation: sparkle 0.8s ease-out forwards;
+}
+.feed-burst i:nth-child(2) {
+  --dx: -28px;
+  --dy: -20px;
+}
+.feed-burst i:nth-child(3) {
+  --dx: 28px;
+  --dy: -28px;
+}
+.feed-burst i:nth-child(4) {
+  --dx: -20px;
+  --dy: 12px;
+}
+.feed-burst i:nth-child(5) {
+  --dx: 26px;
+  --dy: 10px;
+}
+@keyframes sparkle {
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy)) scale(0.4) rotate(65deg);
+  }
+}
+.sweat-drop {
+  position: absolute;
+  width: 9px;
+  height: 14px;
+  left: -22px;
+  top: 5px;
+  display: none;
+}
+.sweat-drop:nth-child(2) {
+  left: 15px;
+  top: 0;
+  animation-delay: 0.6s;
+}
+.sweat-drop svg {
+  width: 100%;
+  height: 100%;
+}
+.animal-effects.low .sweat-drop {
+  display: block;
+  animation: sweat-drip 1.4s ease-in infinite;
+}
+.animal-effects.low .sweat-drop:nth-child(2) {
+  animation-delay: 0.7s;
+}
+@keyframes sweat-drip {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px) scale(0.7);
+  }
+  20% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(24px) scale(1);
+  }
+}
+#reset-game {
+  display: block;
+  margin-top: 10px;
+  background: transparent;
+  border: 1px solid #b4bfaa;
+  color: #44634b;
+  box-shadow: none;
+  padding: 8px 14px;
+  font-size: 10px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .excited .clock-cheer {
+    animation-duration: 0.2s;
+  }
+  .animal-label.low:not(.dead) .bar span {
+    animation: none;
+  }
+  .health-gain,
+  .feed-burst {
+    animation-duration: 0.2s;
+  }
+  .animal-label.low .health-card {
+    animation: none;
+  }
+  .feed-burst i,
+  .animal-effects.low .sweat-drop {
+    display: none;
+  }
+}

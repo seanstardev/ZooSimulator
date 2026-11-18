@@ -1,0 +1,116 @@
+{
+  "kenneySource": "https://kenney.nl/assets/cube-pets",
+  "mirrorCommit": "4eeb333e1866f52163af1ea2f9c02d499141ddce",
+  "files": [
+    {
+      "path": "models/monkey.glb",
+      "source": "https://raw.githubusercontent.com/SixOfFive/DesktopPet/4eeb333e1866f52163af1ea2f9c02d499141ddce/kenney_cube-pets_1.0/Models/GLB%20format/animal-monkey.glb",
+      "sha256": "4f1ba41bd6380f0daa6205442f8fb797c167d7abceaaa58943eae0e6fc9044a6",
+      "bytes": 174944,
+      "animations": [
+        "static",
+        "idle",
+        "walk",
+        "run",
+        "eat",
+        "dance",
+        "gesture-positive",
+        "gesture-negative"
+      ],
+      "images": [
+        {
+          "uri": "Textures/colormap.png",
+          "name": "colormap"
+        }
+      ]
+    },
+    {
+      "path": "models/giraffe.glb",
+      "source": "https://raw.githubusercontent.com/SixOfFive/DesktopPet/4eeb333e1866f52163af1ea2f9c02d499141ddce/kenney_cube-pets_1.0/Models/GLB%20format/animal-giraffe.glb",
+      "sha256": "ab3562e1edb4dc6b14d5c7c9083ba3052a44ca0ccdcac2c15461d84397dc2f31",
+      "bytes": 132676,
+      "animations": [
+        "static",
+        "idle",
+        "walk",
+        "run",
+        "eat",
+        "dance",
+        "gesture-positive",
+        "gesture-negative"
+      ],
+      "images": [
+        {
+          "uri": "Textures/colormap.png",
+          "name": "colormap"
+        }
+      ]
+    },
+    {
+      "path": "models/elephant.glb",
+      "source": "https://raw.githubusercontent.com/SixOfFive/DesktopPet/4eeb333e1866f52163af1ea2f9c02d499141ddce/kenney_cube-pets_1.0/Models/GLB%20format/animal-elephant.glb",
+      "sha256": "0831346fb8ddb8e99e42e3f92fb48858551049dc7ea49e641d90fdfc65e057be",
+      "bytes": 148892,
+      "animations": [
+        "static",
+        "idle",
+        "walk",
+        "run",
+        "eat",
+        "dance",
+        "gesture-positive",
+        "gesture-negative"
+      ],
+      "images": [
+        {
+          "uri": "Textures/colormap.png",
+          "name": "colormap"
+        }
+      ]
+    },
+    {
+      "path": "models/chick.glb",
+      "source": "https://raw.githubusercontent.com/SixOfFive/DesktopPet/4eeb333e1866f52163af1ea2f9c02d499141ddce/kenney_cube-pets_1.0/Models/GLB%20format/animal-chick.glb",
+      "sha256": "86dd5f030c9341486313b35b9e827500c430274a83b5d683cab5b1f55bc1024d",
+      "bytes": 125424,
+      "animations": [
+        "static",
+        "idle",
+        "walk",
+        "run",
+        "eat",
+        "dance",
+        "gesture-positive",
+        "gesture-negative"
+      ],
+      "images": [
+        {
+          "uri": "Textures/colormap.png",
+          "name": "colormap"
+        }
+      ]
+    },
+    {
+      "path": "vendor/babylon.js",
+      "version": "9.37.0",
+      "source": "https://registry.npmjs.org/babylonjs/-/babylonjs-9.37.0.tgz",
+      "license": "Apache-2.0",
+      "sha256": "55586509fd5ef34b4a9be1c563e13425fe8aca82edd08e66cdf3e1e359d1bf65",
+      "bytes": 8911754
+    },
+    {
+      "path": "vendor/babylonjs.loaders.min.js",
+      "version": "9.37.0",
+      "source": "https://registry.npmjs.org/babylonjs-loaders/-/babylonjs-loaders-9.37.0.tgz",
+      "license": "Apache-2.0",
+      "sha256": "c20deb85772d2f7ba0b70ccae74a79a6fe0b0d6b7eaba4721154a808929cfee7",
+      "bytes": 884628
+    },
+    {
+      "path": "models/Textures/colormap.png",
+      "source": "https://raw.githubusercontent.com/SixOfFive/DesktopPet/4eeb333e1866f52163af1ea2f9c02d499141ddce/kenney_cube-pets_1.0/Models/GLB%20format/Textures/colormap.png",
+      "bytes": 10915,
+      "sha256": "2f6d0032e51c2d49b13b8e689d59eb39aa3ee6c32f2a1851213e11fc7593177d"
+    }
+  ]
+}

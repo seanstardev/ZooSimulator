@@ -1,0 +1,30 @@
+# .NET build, test and deployment output
+**/bin/
+**/obj/
+**/TestResults/
+**/coverage/
+**/publish/
+/artifacts/
+/dist/
+*.nupkg
+*.snupkg
+*.binlog
+
+# IDE and user-specific state
+.vs/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.code-workspace
+
+# Browser profiles, local scratch and logs
+**/.WebView2/
+.tmp.ai/
+*.log
+
+# Operating-system metadata
+.DS_Store
+Thumbs.db
+Desktop.ini

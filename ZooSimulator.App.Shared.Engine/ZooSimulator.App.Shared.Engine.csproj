@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <WarningsAsErrors>$(WarningsAsErrors);nullable</WarningsAsErrors>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <OutputPath Condition="'$(EngineEmbedAssets)' == 'false'">bin/$(Configuration)/browser/</OutputPath>
+    <IntermediateOutputPath Condition="'$(EngineEmbedAssets)' == 'false'">obj/$(Configuration)/browser/</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove=".Test/**/*.cs" />
+    <ProjectReference Include="../ZooSimulator.Rmvc/ZooSimulator.Rmvc.csproj" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <EmbeddedResource Include="Assets/**/*" Condition="'$(EngineEmbedAssets)' != 'false'">
+      <LogicalName>EngineAsset.%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.WebAssembly">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>enable</Nullable>
+    <WarningsAsErrors>$(WarningsAsErrors);nullable</WarningsAsErrors>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <WasmBuildNative>false</WasmBuildNative>
+    <RunAOTCompilation>false</RunAOTCompilation>
+    <PublishTrimmed>true</PublishTrimmed>
+    <CompressionEnabled>false</CompressionEnabled>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../ZooSimulator.Rmvc/ZooSimulator.Rmvc.csproj" />
+    <ProjectReference Include="../ZooSimulator.App.Shared.Engine/ZooSimulator.App.Shared.Engine.csproj" />
+    <TrimmerRootAssembly Include="ZooSimulator.Rmvc" />
+    <TrimmerRootAssembly Include="ZooSimulator.App.Shared.Engine" />
+    <Content Include="../ZooSimulator.App.Shared.Engine/Assets/**/*"
+             Exclude="../ZooSimulator.App.Shared.Engine/Assets/host.js"
+             Link="wwwroot/%(RecursiveDir)%(Filename)%(Extension)"
+             CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

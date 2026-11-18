@@ -1,0 +1,19 @@
+* text=auto
+
+# Keep shared web source consistent across platforms.
+*.js text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.ps1 text eol=crlf
+*.cs text eol=crlf
+*.csproj text eol=crlf
+*.sln text eol=crlf
+
+# Preserve exact third-party bytes verified by the asset manifest/tests.
+ZooSimulator.App.Shared.Engine/Assets/vendor/** -text linguist-vendored
+ZooSimulator.App.Shared.Engine/Assets/licenses/** -text
+*.glb binary
+*.png binary
+*.ico binary
