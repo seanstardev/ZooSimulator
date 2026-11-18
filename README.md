@@ -4,7 +4,10 @@ A zoo simulator for the Benefact Group technical exercise. Fifteen animated anim
 live in three habitats, with health, survival, feeding and accelerated zoo time
 owned by a C# RMVC application. WPF and browser hosts share the same Engine scene.
 
-[Play in the browser](https://seanstar.co.uk/ZooSimulator/).
+![Little Wild zoo simulator showing animated animals, health cards and the feeding tray](docs/images/zoo-simulator.png)
+
+<a href="https://seanstar.co.uk/ZooSimulator/" target="_blank" rel="noopener noreferrer">Play in the browser</a> · Ctrl/Cmd-click to open a new tab on GitHub.
+
 Drag food onto an animal or its health card to feed that animal. **Feed whole zoo**
 performs the assignment's species-shared feeding operation. **Reset game** starts
 a fresh population and a full twenty-second interval.
@@ -19,7 +22,7 @@ Install the .NET 9 SDK selected by [global.json](global.json): 9.0.102 or a newe
 ```
 
 The script restores and publishes Release, then creates a fresh timestamped
-`../.tmp.ai/web-delivery/` folder containing:
+`artifacts/web/<timestamp>/` folder inside the repository containing:
 
 - `ZooSimulator/`: complete static upload, including runtime, assets and licences.
 - `ZooSimulator-upload.zip`: an alternative to transferring the unpacked folder.
@@ -28,7 +31,7 @@ The script restores and publishes Release, then creates a fresh timestamped
 An explicit output path must be a new directory:
 
 ```powershell
-./ZooSimulator.App.Web/Publish.ps1 -OutputDirectory ../.tmp.ai/web-delivery/my-build
+./ZooSimulator.App.Web/Publish.ps1 -OutputDirectory ./artifacts/web/my-build
 ```
 
 Upload **the contents** of `ZooSimulator/`, including `.htaccess` and `_framework`,

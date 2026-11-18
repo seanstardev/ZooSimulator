@@ -4,11 +4,10 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $sourceDirectory = Split-Path $PSScriptRoot -Parent
-$workspaceDirectory = Split-Path $sourceDirectory -Parent
 
 if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
     $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
-    $OutputDirectory = Join-Path $workspaceDirectory ".tmp.ai/web-delivery/$stamp"
+    $OutputDirectory = Join-Path $sourceDirectory "artifacts/web/$stamp"
 }
 
 $outputPath = [System.IO.Path]::GetFullPath($OutputDirectory)
