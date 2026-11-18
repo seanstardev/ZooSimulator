@@ -44,13 +44,17 @@ namespace ZooSimulator.App.WPF
         internal static void Trace(string message)
         {
             string[] args = Environment.GetCommandLineArgs();
+
             int index = Array.IndexOf(args, "--verify-scene");
 
             if (index < 0 || index + 1 >= args.Length)
                 return;
 
             Directory.CreateDirectory(args[index + 1]);
-            File.AppendAllText(Path.Combine(args[index + 1], "host.log"), message + Environment.NewLine);
+
+            File.AppendAllText(
+                Path.Combine(args[index + 1], "host.log"),
+                message + Environment.NewLine);
         }
 
         internal static async Task Run(CoreWebView2 browser, string directory)
@@ -71,7 +75,10 @@ namespace ZooSimulator.App.WPF
             }
 
             await Capture(browser, directory, "initial");
-            File.WriteAllText(Path.Combine(directory, "initial.json"), initial.ToString());
+
+            File.WriteAllText(
+                Path.Combine(directory, "initial.json"),
+                initial.ToString());
 
             if (initial["animals"]!.Count() != 15)
                 throw new InvalidOperationException(
@@ -81,7 +88,9 @@ namespace ZooSimulator.App.WPF
 
             var moved = await Read(browser);
 
-            File.WriteAllText(Path.Combine(directory, "movement.json"), moved.ToString());
+            File.WriteAllText(
+                Path.Combine(directory, "movement.json"),
+                moved.ToString());
 
             string hitChecks = await browser.ExecuteScriptAsync(@"JSON.stringify((() => {
                 const animals=[...window.zooDiagnostics.animals.values()], tests=[];
@@ -95,7 +104,9 @@ namespace ZooSimulator.App.WPF
                 return tests;
             })())");
 
-            File.WriteAllText(Path.Combine(directory, "health-hit-tests.json"), JsonConvert.DeserializeObject<string>(hitChecks));
+            File.WriteAllText(
+                Path.Combine(directory, "health-hit-tests.json"),
+                JsonConvert.DeserializeObject<string>(hitChecks));
 
             await browser.ExecuteScriptAsync(@"(() => {
                 const animal=[...window.zooDiagnostics.animals.values()].find(a=>a.health===100);
@@ -106,13 +117,18 @@ namespace ZooSimulator.App.WPF
 
             await Task.Delay(400);
 
-            File.WriteAllText(Path.Combine(directory, "healthy-hover.json"), (await Read(browser)).ToString());
+            File.WriteAllText(
+                Path.Combine(directory, "healthy-hover.json"),
+                (await Read(browser)).ToString());
 
-            await browser.ExecuteScriptAsync("document.dispatchEvent(new PointerEvent('pointerleave',{pointerId:99}))");
+            await browser.ExecuteScriptAsync(
+                "document.dispatchEvent(new PointerEvent('pointerleave',{pointerId:99}))");
 
             await Task.Delay(1000);
 
-            File.WriteAllText(Path.Combine(directory, "healthy-hover-ended.json"), (await Read(browser)).ToString());
+            File.WriteAllText(
+                Path.Combine(directory, "healthy-hover-ended.json"),
+                (await Read(browser)).ToString());
 
             // Exercise a real twenty-second hourly transition through the running application.
             for (int attempt = 0; attempt < 65 && moved.Value<string>("hour") == "HOUR 00"; attempt++)
@@ -122,10 +138,15 @@ namespace ZooSimulator.App.WPF
                 moved = await Read(browser);
             }
 
-            File.WriteAllText(Path.Combine(directory, "hour.json"), moved.ToString());
+            File.WriteAllText(
+                Path.Combine(directory, "hour.json"),
+                moved.ToString());
+
             await Capture(browser, directory, "hour");
 
-            var target = moved["animals"]!.First(animal => animal.Value<double>("health") < 99);
+            var target = moved["animals"]!.First(
+                animal => animal.Value<double>("health") < 99);
+
             int id = target.Value<int>("id");
 
             await browser.ExecuteScriptAsync(
@@ -138,6 +159,7 @@ namespace ZooSimulator.App.WPF
             await Task.Delay(80);
 
             File.WriteAllText(Path.Combine(directory, "hover.json"), (await Read(browser)).ToString());
+
             await Capture(browser, directory, "hover");
 
             await browser.ExecuteScriptAsync(
@@ -147,6 +169,7 @@ namespace ZooSimulator.App.WPF
             await Task.Delay(180);
 
             File.WriteAllText(Path.Combine(directory, "feeding-feedback.json"), (await Read(browser)).ToString());
+
             await Capture(browser, directory, "feeding-feedback");
 
             await Task.Delay(520);
@@ -154,6 +177,7 @@ namespace ZooSimulator.App.WPF
             var targeted = await Read(browser);
 
             File.WriteAllText(Path.Combine(directory, "targeted.json"), targeted.ToString());
+
             await browser.ExecuteScriptAsync("document.getElementById('feed-all').click()");
 
             await Task.Delay(700);
@@ -161,25 +185,34 @@ namespace ZooSimulator.App.WPF
             var fed = await Read(browser);
 
             File.WriteAllText(Path.Combine(directory, "fed.json"), fed.ToString());
+
             await Capture(browser, directory, "fed");
 
             await browser.ExecuteScriptAsync("document.getElementById('reset-game').click()");
 
             await Task.Delay(200);
 
-            File.WriteAllText(Path.Combine(directory, "reset-growing.json"), (await Read(browser)).ToString());
+            File.WriteAllText(
+                Path.Combine(directory, "reset-growing.json"),
+                (await Read(browser)).ToString());
 
             await Task.Delay(600);
 
             var reset = await Read(browser);
 
-            File.WriteAllText(Path.Combine(directory, "reset.json"), reset.ToString());
+            File.WriteAllText(
+                Path.Combine(directory, "reset.json"),
+                reset.ToString());
+
             await Capture(browser, directory, "reset");
 
             if (reset.Value<string>("hour") != "HOUR 00" ||
-                reset["animals"]!.Any(animal => animal.Value<double>("health") != 100))
+                reset["animals"]!.Any(
+                    animal => animal.Value<double>("health") != 100))
+            {
                 throw new InvalidOperationException(
                     "Reset did not restore hour zero and full animal health.");
+            }
 
             // Sample the per-frame limit rather than relying only on a screenshot of a turn.
             await browser.ExecuteScriptAsync(@"(() => {
@@ -196,7 +229,9 @@ namespace ZooSimulator.App.WPF
 
             string motion = await browser.ExecuteScriptAsync("JSON.stringify(window.zooMotionSamples)");
 
-            File.WriteAllText(Path.Combine(directory, "motion.json"), JsonConvert.DeserializeObject<string>(motion));
+            File.WriteAllText(
+                Path.Combine(directory, "motion.json"),
+                JsonConvert.DeserializeObject<string>(motion));
 
             // Presentation-only probe: core survival rules are covered by domain tests.
             await browser.ExecuteScriptAsync(@"(() => {
@@ -209,7 +244,10 @@ namespace ZooSimulator.App.WPF
             await Task.Delay(500);
 
             await Capture(browser, directory, "presentation-states");
-            File.WriteAllText(Path.Combine(directory, "presentation-states.json"), (await Read(browser)).ToString());
+
+            File.WriteAllText(
+                Path.Combine(directory, "presentation-states.json"),
+                (await Read(browser)).ToString());
 
             await browser.ExecuteScriptAsync(@"(() => {
                 const stats=window.zooResizeStats={frames:0,outOfBounds:0,renderMilliseconds:[],lowAnimations:document.querySelector('.animal-label.low .bar span')?.getAnimations().length};
@@ -240,17 +278,23 @@ namespace ZooSimulator.App.WPF
 
             await Task.Delay(600);
 
-            string resizeStats = await browser.ExecuteScriptAsync("JSON.stringify(window.zooResizeStats)");
+            string resizeStats = await browser.ExecuteScriptAsync(
+                "JSON.stringify(window.zooResizeStats)");
 
-            await browser.ExecuteScriptAsync("window.zooDiagnostics.scene.onAfterRenderObservable.remove(window.zooResizeObserver)");
+            await browser.ExecuteScriptAsync(
+                "window.zooDiagnostics.scene.onAfterRenderObservable.remove(window.zooResizeObserver)");
 
-            File.WriteAllText(Path.Combine(directory, "resize.json"), JsonConvert.DeserializeObject<string>(resizeStats));
+            File.WriteAllText(
+                Path.Combine(directory, "resize.json"),
+                JsonConvert.DeserializeObject<string>(resizeStats));
+
             await Capture(browser, directory, "resized");
         }
 
         private static async Task<JObject> Read(CoreWebView2 browser)
         {
             string encoded = await browser.ExecuteScriptAsync(readState);
+
             string json = JsonConvert.DeserializeObject<string>(encoded)
                 ?? "{}";
 
@@ -259,9 +303,11 @@ namespace ZooSimulator.App.WPF
 
         private static async Task Capture(CoreWebView2 browser, string directory, string name)
         {
-            using var output = File.Create(Path.Combine(directory, name + ".png"));
+            using var output = File.Create(
+                Path.Combine(directory, name + ".png"));
 
-            await browser.CapturePreviewAsync(CoreWebView2CapturePreviewImageFormat.Png, output);
+            await browser.CapturePreviewAsync(
+                CoreWebView2CapturePreviewImageFormat.Png, output);
         }
     }
 }

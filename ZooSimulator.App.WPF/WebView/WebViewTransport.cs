@@ -12,12 +12,13 @@ namespace ZooSimulator.App.WPF
         private readonly Dispatcher dispatcher;
         private bool disposed;
 
-        public event Action<string>? MessageReceived;
+        public event Action<string>? MessageReceivedEvt;
 
         internal WebViewTransport(CoreWebView2 browser, Dispatcher dispatcher)
         {
             this.browser = browser
                 ?? throw new ArgumentNullException(nameof(browser));
+
             this.dispatcher = dispatcher
                 ?? throw new ArgumentNullException(nameof(dispatcher));
 
@@ -46,7 +47,7 @@ namespace ZooSimulator.App.WPF
                 return;
 
             if (source.Scheme == "https" && source.Host == "zoo.local" && source.IsDefaultPort)
-                MessageReceived?.Invoke(e.WebMessageAsJson);
+                MessageReceivedEvt?.Invoke(e.WebMessageAsJson);
         }
     }
 }

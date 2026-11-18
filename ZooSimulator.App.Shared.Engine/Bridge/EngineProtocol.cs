@@ -11,9 +11,16 @@ namespace ZooSimulator.App.Shared.Engine
             ContractResolver = new CamelCasePropertyNamesContractResolver()
         };
 
-        internal static void Send(IEngineTransport transport, string actor, string operation, object data)
+        internal static void Send(
+            IEngineTransport transport,
+            string actor,
+            string operation,
+            object data)
             => transport.PostMessage(JsonConvert.SerializeObject(
-                new { version = 1, actor, operation, data },
+                new
+                {
+                    version = 1, actor, operation, data
+                },
                 settings));
     }
 }

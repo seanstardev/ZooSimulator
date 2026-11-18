@@ -6,7 +6,7 @@ namespace ZooSimulator.App.Web
     /// <summary>Routes JSON on the single browser runtime's presentation context.</summary>
     internal sealed class BrowserTransport : IEngineTransport
     {
-        public event Action<string>? MessageReceived;
+        public event Action<string>? MessageReceivedEvt;
 
         public void PostMessage(string json)
             => BrowserInterop.PostMessage(json);
@@ -15,7 +15,7 @@ namespace ZooSimulator.App.Web
         {
             ArgumentNullException.ThrowIfNull(json);
 
-            MessageReceived?.Invoke(json);
+            MessageReceivedEvt?.Invoke(json);
         }
     }
 }

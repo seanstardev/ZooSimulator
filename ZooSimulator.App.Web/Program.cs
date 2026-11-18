@@ -1,4 +1,3 @@
-using System;
 using System.Runtime.InteropServices.JavaScript;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
@@ -24,7 +23,8 @@ namespace ZooSimulator.App.Web
             var shell = new BrowserShell();
 
             engine = new GameEngine(transport);
-            engine.Diagnostic += BrowserInterop.ReportDiagnostic;
+            engine.DiagnosticEvt += BrowserInterop.ReportDiagnostic;
+
             RFacade.Create<ZooFacade>(shell);
 
             await shell.Started;

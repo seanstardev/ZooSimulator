@@ -8,9 +8,9 @@ namespace ZooSimulator.Rmvc.Shared
     {
         /// <summary>Raised once for each request to feed every species in the zoo.</summary>
         /// <remarks>The application generates one percentage per species for this request.</remarks>
-        event Action? FeedRequested;
+        event Action? FeedRequestedEvt;
 
         /// <summary>Requests feeding only the dropped-on animal, a deliberate gameplay extension.</summary>
-        event Action<int>? AnimalFeedRequested;
+        event Action<int>? AnimalFeedRequestedEvt;
     }
 }

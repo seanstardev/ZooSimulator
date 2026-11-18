@@ -15,7 +15,6 @@ namespace ZooSimulator.Rmvc
                 throw new ArgumentOutOfRangeException(nameof(minimumInclusive));
 
             lock (gate)
-
                 return random.Next(minimumInclusive, maximumInclusive + 1);
         }
     }

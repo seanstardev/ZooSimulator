@@ -16,13 +16,16 @@ namespace ZooSimulator.App.Web
         public void HandleStateChanged(RApplicationState state, string? message = null)
         {
             if (state == RApplicationState.Running)
+            {
                 started.TrySetResult();
+            }
             else if (state == RApplicationState.Failed)
             {
                 string detail = message
                     ?? "The zoo application could not start.";
 
                 started.TrySetException(new InvalidOperationException(detail));
+
                 BrowserInterop.ReportDiagnostic(detail);
             }
         }

@@ -5,17 +5,17 @@ namespace ZooSimulator.Rmvc.Tests
 {
     internal sealed class RecordingFeedingView : IFeedingView
     {
-        public event Action? FeedRequested;
-        public event Action<int>? AnimalFeedRequested;
+        public event Action? FeedRequestedEvt;
+        public event Action<int>? AnimalFeedRequestedEvt;
 
         public int SubscriberCount
-            => FeedRequested?.GetInvocationList().Length
+            => FeedRequestedEvt?.GetInvocationList().Length
                 ?? 0;
 
         public void RequestAnimalFeed(int animalId)
-            => AnimalFeedRequested?.Invoke(animalId);
+            => AnimalFeedRequestedEvt?.Invoke(animalId);
 
         public void RequestFeed()
-            => FeedRequested?.Invoke();
+            => FeedRequestedEvt?.Invoke();
     }
 }

@@ -5,13 +5,13 @@ namespace ZooSimulator.Rmvc.Tests
 {
     internal sealed class RecordingMainView : IMainView
     {
-        public event Action? Ready;
-        public event Action? ResetRequested;
+        public event Action? ReadyEvt;
+        public event Action? ResetRequestedEvt;
 
         public void RequestReset()
-            => ResetRequested?.Invoke();
+            => ResetRequestedEvt?.Invoke();
 
         public void RequestReady()
-            => Ready?.Invoke();
+            => ReadyEvt?.Invoke();
     }
 }

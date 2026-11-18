@@ -8,14 +8,14 @@ namespace ZooSimulator.Rmvc
     {
         protected override void ActorAttached(IFeedingView actor)
         {
-            actor.FeedRequested += OnFeedRequested;
-            actor.AnimalFeedRequested += OnAnimalFeedRequested;
+            actor.FeedRequestedEvt += OnFeedRequested;
+            actor.AnimalFeedRequestedEvt += OnAnimalFeedRequested;
         }
 
         protected override void ActorDetached(IFeedingView actor)
         {
-            actor.FeedRequested -= OnFeedRequested;
-            actor.AnimalFeedRequested -= OnAnimalFeedRequested;
+            actor.FeedRequestedEvt -= OnFeedRequested;
+            actor.AnimalFeedRequestedEvt -= OnAnimalFeedRequested;
         }
 
         private void OnAnimalFeedRequested(int animalId)

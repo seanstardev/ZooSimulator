@@ -8,11 +8,11 @@ namespace ZooSimulator.Rmvc.Tests
     {
         private int startCount;
 
-        public event Action<long>? Tick;
+        public event Action<long>? TickEvt;
         public long ScheduleVersion { get; private set; }
         public TimeSpan Interval { get; private set; }
         public int StartCount => Volatile.Read(ref startCount);
-        public int SubscriberCount => Tick?.GetInvocationList().Length ?? 0;
+        public int SubscriberCount => TickEvt?.GetInvocationList().Length ?? 0;
         public bool Disposed { get; private set; }
         public int DisposeCount { get; private set; }
 
@@ -24,7 +24,7 @@ namespace ZooSimulator.Rmvc.Tests
         }
 
         public void Fire(long? version = null)
-            => Tick?.Invoke(version ?? ScheduleVersion);
+            => TickEvt?.Invoke(version ?? ScheduleVersion);
 
         public void Dispose()
         {

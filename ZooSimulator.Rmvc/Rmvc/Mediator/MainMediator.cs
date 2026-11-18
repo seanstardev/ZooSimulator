@@ -8,14 +8,14 @@ namespace ZooSimulator.Rmvc
     {
         protected override void ActorAttached(IMainView actor)
         {
-            actor.Ready += OnReady;
-            actor.ResetRequested += OnResetRequested;
+            actor.ReadyEvt += OnReady;
+            actor.ResetRequestedEvt += OnResetRequested;
         }
 
         protected override void ActorDetached(IMainView actor)
         {
-            actor.Ready -= OnReady;
-            actor.ResetRequested -= OnResetRequested;
+            actor.ReadyEvt -= OnReady;
+            actor.ResetRequestedEvt -= OnResetRequested;
         }
 
         private void OnResetRequested()

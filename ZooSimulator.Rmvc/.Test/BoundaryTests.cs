@@ -174,7 +174,7 @@ namespace ZooSimulator.Rmvc.Tests
             var delivered = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             int callbacks = 0;
 
-            scheduler.Tick += OnTick;
+            scheduler.TickEvt += OnTick;
             scheduler.Start(TimeSpan.FromMilliseconds(20), 0);
 
             await delivered.Task.WaitAsync(TimeSpan.FromSeconds(10));

@@ -66,7 +66,7 @@ namespace ZooSimulator.Rmvc
                     return Task.CompletedTask;
 
                 stopped = true;
-                scheduler.Tick -= OnTick;
+                scheduler.TickEvt -= OnTick;
                 scheduler.Dispose();
             }
 
@@ -78,8 +78,10 @@ namespace ZooSimulator.Rmvc
             lock (gate)
             {
                 if (stopped)
+                {
                     throw new InvalidOperationException(
                         "The clock has been cleaned up.");
+                }
 
                 if (started && restart == false)
                     return;
@@ -87,7 +89,7 @@ namespace ZooSimulator.Rmvc
                 if (started == false)
                 {
                     started = true;
-                    scheduler.Tick += OnTick;
+                    scheduler.TickEvt += OnTick;
                 }
 
                 if (restart)

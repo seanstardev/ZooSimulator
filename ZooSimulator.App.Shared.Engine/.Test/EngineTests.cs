@@ -47,11 +47,11 @@ namespace ZooSimulator.App.Shared.Engine.Tests
             int target = 0;
             var diagnostics = new List<string>();
 
-            engine.MainView.Ready += () => ready++;
-            engine.MainView.ResetRequested += () => resets++;
-            engine.FeedingView.FeedRequested += () => feeds++;
-            engine.FeedingView.AnimalFeedRequested += id => target = id;
-            engine.Diagnostic += diagnostics.Add;
+            engine.MainView.ReadyEvt += () => ready++;
+            engine.MainView.ResetRequestedEvt += () => resets++;
+            engine.FeedingView.FeedRequestedEvt += () => feeds++;
+            engine.FeedingView.AnimalFeedRequestedEvt += id => target = id;
+            engine.DiagnosticEvt += diagnostics.Add;
 
             transport.Receive("{\"version\":1,\"actor\":\"main\",\"event\":\"ready\"}");
             transport.Receive("{\"version\":1,\"actor\":\"feeding\",\"event\":\"feedZoo\"}");
@@ -103,8 +103,8 @@ namespace ZooSimulator.App.Shared.Engine.Tests
             var diagnostics = new List<string>();
             int ready = 0;
 
-            engine.Diagnostic += diagnostics.Add;
-            engine.MainView.Ready += () => ready++;
+            engine.DiagnosticEvt += diagnostics.Add;
+            engine.MainView.ReadyEvt += () => ready++;
 
             transport.Receive(json);
             transport.Receive("{\"version\":1,\"actor\":\"main\",\"event\":\"ready\"}");

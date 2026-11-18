@@ -6,7 +6,7 @@ namespace ZooSimulator.App.Shared.Engine
     public interface IEngineTransport
     {
         /// <summary>Delivers one message from the trusted engine document.</summary>
-        event Action<string>? MessageReceived;
+        event Action<string>? MessageReceivedEvt;
 
         /// <summary>Posts JSON to the engine document on its presentation context.</summary>
         void PostMessage(string json);

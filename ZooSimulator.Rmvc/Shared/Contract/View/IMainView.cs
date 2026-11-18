@@ -12,9 +12,9 @@ namespace ZooSimulator.Rmvc.Shared
     {
         /// <summary>Raised after attachment when the initial composed presentation is usable.</summary>
         /// <remarks>Repeated readiness refreshes current state without restarting the clock.</remarks>
-        event Action? Ready;
+        event Action? ReadyEvt;
 
         /// <summary>Requests a fresh game population and a fresh full hour interval.</summary>
-        event Action? ResetRequested;
+        event Action? ResetRequestedEvt;
     }
 }

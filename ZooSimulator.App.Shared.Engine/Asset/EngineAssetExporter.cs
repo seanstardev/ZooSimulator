@@ -15,12 +15,19 @@ namespace ZooSimulator.App.Shared.Engine
                 throw new ArgumentNullException(nameof(applicationDirectory));
 
             if (Path.IsPathRooted(applicationDirectory) == false)
+            {
                 throw new ArgumentException(
                     "An absolute application directory is required.",
                     nameof(applicationDirectory));
+            }
 
-            string directory = Path.GetFullPath(Path.Combine(applicationDirectory, "Engine"));
+            string directory = Path.GetFullPath(
+                Path.Combine(
+                    applicationDirectory,
+                    "Engine"));
+
             string prefix = directory + Path.DirectorySeparatorChar;
+
             var assembly = typeof(EngineAssetExporter).GetTypeInfo().Assembly;
 
             Directory.CreateDirectory(directory);
@@ -32,11 +39,14 @@ namespace ZooSimulator.App.Shared.Engine
 
                 string relative = name.Substring("EngineAsset.".Length)
                     .Replace('\\', Path.DirectorySeparatorChar).Replace('/', Path.DirectorySeparatorChar);
+
                 string target = Path.GetFullPath(Path.Combine(directory, relative));
 
                 if (target.StartsWith(prefix, StringComparison.OrdinalIgnoreCase) == false)
+                {
                     throw new InvalidOperationException(
                         "An embedded asset escaped the Engine directory.");
+                }
 
                 Directory.CreateDirectory(Path.GetDirectoryName(target)!);
 
@@ -50,8 +60,10 @@ namespace ZooSimulator.App.Shared.Engine
             }
 
             if (File.Exists(Path.Combine(directory, "index.html")) == false)
+            {
                 throw new InvalidOperationException(
                     "The engine entry document is missing.");
+            }
 
             return directory;
         }

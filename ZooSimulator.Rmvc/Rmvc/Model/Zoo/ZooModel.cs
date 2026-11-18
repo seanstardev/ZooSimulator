@@ -22,8 +22,10 @@ namespace ZooSimulator.Rmvc
             lock (gate)
             {
                 if (animals.Count != 0)
+                {
                     throw new InvalidOperationException(
                         "The zoo has already been initialised.");
+                }
 
                 Populate();
             }
@@ -51,16 +53,20 @@ namespace ZooSimulator.Rmvc
                 RequireInitialised();
 
                 if (decay.Animals.Count != animals.Count)
+                {
                     throw new ArgumentException(
                         "An hour requires one decay entry for every animal.",
                         nameof(decay));
+                }
 
                 for (int index = 0; index < animals.Count; index++)
                 {
                     if (decay.Animals[index].AnimalId != animals[index].Id)
+                    {
                         throw new ArgumentException(
                             "Decay identities must match the zoo's stable animal order.",
                             nameof(decay));
+                    }
                 }
 
                 hoursElapsed++;
@@ -70,6 +76,7 @@ namespace ZooSimulator.Rmvc
                         decay.Animals[index].Percentage, hoursElapsed);
 
                 revision++;
+
                 snapshot = CreateSnapshot();
             }
 
@@ -95,6 +102,7 @@ namespace ZooSimulator.Rmvc
                     return;
 
                 revision++;
+
                 snapshot = CreateSnapshot();
             }
 
@@ -119,6 +127,7 @@ namespace ZooSimulator.Rmvc
                     return;
 
                 revision++;
+
                 snapshot = CreateSnapshot();
             }
 
@@ -164,8 +173,10 @@ namespace ZooSimulator.Rmvc
         private void RequireInitialised()
         {
             if (animals.Count == 0)
+            {
                 throw new InvalidOperationException(
                     "The zoo has not been initialised.");
+            }
         }
     }
 }

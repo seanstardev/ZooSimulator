@@ -18,7 +18,9 @@ namespace ZooSimulator.App.WPF
                     return;
 
                 status = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Status)));
+
+                PropertyChanged?.Invoke(
+                    this, new PropertyChangedEventArgs(nameof(Status)));
             }
         }
     }

@@ -45,6 +45,7 @@ namespace ZooSimulator.Rmvc.Model.Zoo
 
             double previousHealth = Health;
             Health = Math.Min(100, Health * (1 + percentage / 100));
+
             EvaluateHealth(hour);
 
             return Health != previousHealth;

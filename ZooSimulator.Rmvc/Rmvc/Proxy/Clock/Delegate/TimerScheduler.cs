@@ -8,7 +8,7 @@ namespace ZooSimulator.Rmvc.Proxy.Clock
     {
         private Timer? timer;
 
-        public event Action<long>? Tick;
+        public event Action<long>? TickEvt;
 
         public void Start(TimeSpan interval, long scheduleVersion)
         {
@@ -23,6 +23,6 @@ namespace ZooSimulator.Rmvc.Proxy.Clock
         }
 
         private void OnTick(object? state)
-            => Tick?.Invoke((long)state!);
+            => TickEvt?.Invoke((long)state!);
     }
 }
